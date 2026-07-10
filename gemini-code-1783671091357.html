@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novationery | Kampus Essentials</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <h1 class="logo" onclick="navigate('home')">Novationery.</h1>
+            <nav class="nav-links">
+                <button class="nav-btn active" data-target="home">Beranda</button>
+                <button class="nav-btn" data-target="catalog">Katalog</button>
+                <button class="nav-btn" data-target="about">Tentang Saya</button>
+                <button class="nav-btn" data-target="admin">Admin</button>
+            </nav>
+            <div class="nav-actions">
+                <div class="cart-icon" onclick="navigate('cart')">
+                    🛒 <span id="cart-badge" class="badge">0</span>
+                </div>
+                <div class="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-content">
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="hero-text">
+                    <h2>Sukses Kuliah Dimulai dari Meja Belajarmu.</h2>
+                    <p>Temukan alat tulis dan perlengkapan kampus terbaik untuk mendukung produktivitasmu di Novationery.</p>
+                    <button class="cta-btn" onclick="navigate('catalog')">Belanja Sekarang</button>
+                </div>
+            </div>
+            <div class="container promo-banner">
+                <h3>✨ Promo Khusus Mahasiswa! Diskon hingga 20% untuk pembelian pertama. ✨</h3>
+            </div>
+            <div class="container featured-section">
+                <h3 class="section-title">Produk Unggulan</h3>
+                <div id="featured-grid" class="product-grid"></div>
+            </div>
+        </section>
+
+        <section id="catalog" class="page">
+            <div class="container">
+                <h2 class="section-title">Katalog Produk</h2>
+                <div class="filter-bar">
+                    <input type="text" id="search-input" placeholder="Cari produk...">
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-filter="all">Semua</button>
+                        <button class="filter-btn" data-filter="Stationery">Stationery</button>
+                        <button class="filter-btn" data-filter="Laptop Accessories">Laptop</button>
+                        <button class="filter-btn" data-filter="Desk Essentials">Desk</button>
+                    </div>
+                </div>
+                <div id="catalog-grid" class="product-grid"></div>
+            </div>
+        </section>
+
+        <section id="cart" class="page">
+            <div class="container">
+                <h2 class="section-title">Keranjang Belanja</h2>
+                <div class="cart-layout">
+                    <div id="cart-items" class="cart-list">
+                        </div>
+                    <div class="cart-summary">
+                        <h3>Ringkasan Pesanan</h3>
+                        <div class="summary-row">
+                            <span>Total Item:</span>
+                            <span id="total-items">0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Harga:</span>
+                            <span id="total-price">Rp 0</span>
+                        </div>
+                        <button id="checkout-btn" class="checkout-btn" disabled>Lanjut ke Pembayaran</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="page">
+            <div class="container about-container">
+                <div class="about-profile">
+                    <div class="profile-avatar">N</div>
+                    <h2>Novi</h2>
+                    <p class="role">Founder Novationery</p>
+                </div>
+                <div class="about-content">
+                    <h3>Visi & Misi</h3>
+                    <p>Novationery lahir dari keresahan mahasiswa yang membutuhkan perlengkapan belajar yang estetis, terjangkau, dan fungsional. Misi kami adalah mendukung setiap langkah akademis Anda dengan peralatan terbaik.</p>
+                    
+                    <h3 class="mt-2">Hubungi Saya</h3>
+                    <form id="contact-form" class="contact-form">
+                        <input type="text" placeholder="Nama Anda" required>
+                        <input type="email" placeholder="Email" required>
+                        <textarea rows="4" placeholder="Pesan Anda" required></textarea>
+                        <button type="submit">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin" class="page">
+            <div class="container admin-container">
+                <h2 class="section-title">Admin Dashboard</h2>
+                <div class="admin-panel">
+                    <div class="admin-form-container">
+                        <h3>Tambah/Edit Produk</h3>
+                        <form id="admin-form">
+                            <input type="hidden" id="admin-id">
+                            <input type="text" id="admin-name" placeholder="Nama Produk" required>
+                            <select id="admin-category" required>
+                                <option value="Stationery">Stationery</option>
+                                <option value="Laptop Accessories">Laptop Accessories</option>
+                                <option value="Desk Essentials">Desk Essentials</option>
+                            </select>
+                            <input type="number" id="admin-price" placeholder="Harga (Rp)" required>
+                            <input type="number" id="admin-stock" placeholder="Stok" required>
+                            <input type="text" id="admin-image" placeholder="Path Gambar (contoh: images/item.jpg)" required>
+                            <button type="submit" id="admin-submit">Simpan Produk</button>
+                            <button type="button" id="admin-cancel" style="display:none; background:#ccc; color:#333;">Batal</button>
+                        </form>
+                    </div>
+                    <div class="admin-list-container">
+                        <h3>Daftar Produk</h3>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Pilih Metode Pembayaran</h2>
+            <div class="payment-methods">
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="QRIS" checked>
+                    <div class="pay-box">QRIS <div class="qris-placeholder">QR</div></div>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="GoPay">
+                    <div class="pay-box">GoPay</div>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="OVO">
+                    <div class="pay-box">OVO</div>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="Bank">
+                    <div class="pay-box">Transfer Bank</div>
+                </label>
+            </div>
+            <button id="pay-now-btn" class="pay-btn">Bayar Sekarang</button>
+        </div>
+    </div>
+
+    <div id="loading-screen" class="fullscreen-overlay" style="display:none;">
+        <div class="spinner"></div>
+        <h2 class="loading-text">Memproses pembayaran aman Anda...</h2>
+    </div>
+
+    <div id="success-screen" class="fullscreen-overlay" style="display:none;">
+        <div class="success-icon">✔️</div>
+        <h2>Pembayaran Berhasil!</h2>
+        <p>Terima kasih telah berbelanja di Novationery.</p>
+        <p>ID Transaksi: <strong id="trx-id"></strong></p>
+        <button id="continue-shopping-btn">Lanjut Belanja</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
